@@ -30,6 +30,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Iconify from '../components/Iconify';
 import Page from '../components/Page';
+import ArchitectDesigner from '../components/Master/Architect.Designer';
+import ArchitectDesignerCordinator from '../components/Master/Architect.Designer.Cordinator';
+import Manager from '../components/Master/Manager';
+import Product from '../components/Master/Product';
+import Customer from '../components/Master/Customer';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -122,19 +128,19 @@ const Master = () => {
                 </Tabs>
               </Box>
               <TabPanel value={headTab} index={0}>
-                {/* <Tools /> */}
+                <ArchitectDesigner />
               </TabPanel>
               <TabPanel value={headTab} index={1}>
-                {/* <ShortService /> */}
+                <ArchitectDesignerCordinator />
               </TabPanel>
               <TabPanel value={headTab} index={2}>
-                {/* <AddOnService /> */}
+                <Manager />
               </TabPanel>
               <TabPanel value={headTab} index={3}>
-                {/* <AddOnService /> */}
+                <Product />
               </TabPanel>
               <TabPanel value={headTab} index={4}>
-                {/* <AddOnService /> */}
+                <Customer />
               </TabPanel>
             </Box>
           </Card>
