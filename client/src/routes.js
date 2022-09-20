@@ -17,6 +17,12 @@ import Survey from './pages/Survey'
 import WorkPartner from './pages/WorkPartner'
 import RateMaster from './pages/RateMaster';
 import WorkPartnerRateMaster from './pages/WorkPartnerRateMaster';
+import Master from './pages/Master';
+import MyOrders from './pages/MyOrders';
+import ComplaintTicket from './pages/ComplaintTicket';
+import AMC from './pages/AMC';
+import Settings from './pages/Settings';
+import SurveyTicket from './pages/SurveyTicket';
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +43,12 @@ export default function Router() {
         { path: 'survey', element: <Survey />},
         { path: 'rateMaster', element: <RateMaster />},
         { path: 'workPartnerRateMaster', element: <WorkPartnerRateMaster />},
+        { path: 'master', element: <Master />},
+        { path: 'myOrders', element: <MyOrders />},
+        { path: 'complaintTicket', element: <ComplaintTicket />},
+        { path: 'surveyTicket', element: <SurveyTicket />},
+        { path: 'amc', element: <AMC />},
+        { path: 'settings', element: <Settings />},
       ],
     },
     {
