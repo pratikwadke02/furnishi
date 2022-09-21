@@ -14,6 +14,10 @@ module.exports = (app) => {
     const workPartnerLongServices = require('../controllers/workPartner/longService.workPartner.controller');
     const workPartnerShortServices = require('../controllers/workPartner/shortService.workPartner.controller');
 
+    const archtDesigr = require('../controllers/master/Architect.Designer.controller.js');
+    const manager = require('../controllers/master/Manager.controller.js');
+    const archtDesigrCord = require('../controllers/master/Architect.Designer.Cordinator.controller.js');
+
 
     const toolsSiteSettings = require('../controllers/siteSettings/tools.siteSettings.controller.js');
     const workPhaseSiteSettings = require('../controllers/siteSettings/workPhase.siteSettings.controller.js');
@@ -71,6 +75,15 @@ module.exports = (app) => {
     router.post("/addWorkPhaseSiteSettings", workPhaseSiteSettings.create);
     router.get("/getWorkPhaseSiteSettings", workPhaseSiteSettings.findAll);
     router.put("/updateWorkPhaseSiteSettings", workPhaseSiteSettings.update);
+
+    router.post("/addArchtDesigr", archtDesigr.create);
+    router.get("/getArchtDesigr", archtDesigr.findAll);
+
+    router.post("/addManager", manager.create);
+    router.get("/getManager", manager.findAll);
+
+    router.post("/addArchtDesigrCord", archtDesigrCord.create);
+    router.get("/getArchtDesigrCord", archtDesigrCord.findAll);
     
 
     app.use("/api/wsb", router);
