@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import axios from 'axios';
 
 const ArchitectDesigner = () => {
   const [archtDesigrInfo, setArchtDesigrInfo] = React.useState({
@@ -9,17 +10,25 @@ const ArchitectDesigner = () => {
     emailId: '',
     contactOne: '',
     contactTwo: '',
-    CordinatorName: '',
-    CordinatorContact: '',
+    cordinatorName: '',
+    cordinatorContact: '',
     projectName: '',
     projectCordinatorName: '',
     projectCordinatorContact: '',
-    projectAddress: '',
+    projectCordinatorEmail: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(e.target);
+    try{
+      console.log(archtDesigrInfo);
+      await axios.post('http://localhost:8080/api/wsb/addArchtDesigr', archtDesigrInfo).then((res) => {
+        console.log(res);
+      }
+      );
+    }catch(error){
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {
@@ -108,20 +117,20 @@ const ArchitectDesigner = () => {
           variant="outlined"
           fullWidth
           type="text"
-          name="CordinatorName"
-          value={archtDesigrInfo.CordinatorName}
+          name="cordinatorName"
+          value={archtDesigrInfo.cordinatorName}
           onChange={handleChange}
           sx={{ mr: { md: 1 } }}
         />
         <TextField
           required
-          label="Cordinator Contact"
+          label="cordinator Contact"
           variant="outlined"
           fullWidth
           sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
           type="number"
-          name="CordinatorContact"
-          value={archtDesigrInfo.CordinatorContact}
+          name="cordinatorContact"
+          value={archtDesigrInfo.cordinatorContact}
           onChange={handleChange}
         />
       </Box>

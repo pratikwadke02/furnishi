@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import axios from 'axios';
 
 const ArchitectDesignerCordinator = () => {
   const [archtDesigrCordInfo, setArchtDesigrCordInfo] = React.useState({
@@ -9,17 +10,25 @@ const ArchitectDesignerCordinator = () => {
     emailId: '',
     contactOne: '',
     contactTwo: '',
-    CordinatorName: '',
-    CordinatorContact: '',
+    cordinatorName: '',
+    cordinatorContact: '',
     projectName: '',
     projectCordinatorName: '',
     projectCordinatorContact: '',
-    projectAddress: '',
+    projectCordinatorEmail: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(e.target);
+    try{
+      console.log(archtDesigrCordInfo);
+      await axios.post('http://localhost:8080/api/wsb/addArchtDesigrCord', archtDesigrCordInfo).then((res) => {
+        console.log(res);
+      }
+      );
+    }catch(error){
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {
@@ -102,26 +111,26 @@ const ArchitectDesignerCordinator = () => {
         />
       </Box>
       <Box sx={{ display: 'flex', mt: 2, mb: 2 }}>
-        <TextField
+      <TextField
           required
           label="Cordinator Name"
           variant="outlined"
           fullWidth
           type="text"
-          name="CordinatorName"
-          value={archtDesigrCordInfo.CordinatorName}
+          name="cordinatorName"
+          value={archtDesigrCordInfo.cordinatorName}
           onChange={handleChange}
           sx={{ mr: { md: 1 } }}
         />
         <TextField
           required
-          label="Cordinator Contact"
+          label="cordinator Contact"
           variant="outlined"
           fullWidth
           sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
           type="number"
-          name="CordinatorContact"
-          value={archtDesigrCordInfo.CordinatorContact}
+          name="cordinatorContact"
+          value={archtDesigrCordInfo.cordinatorContact}
           onChange={handleChange}
         />
       </Box>

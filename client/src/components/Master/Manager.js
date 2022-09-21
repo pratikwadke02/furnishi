@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import axios from 'axios';
 
 const Manager = () => {
   const [managerInfo, setManagerInfo] = useState({
@@ -9,17 +10,25 @@ const Manager = () => {
     emailId: '',
     contactOne: '',
     contactTwo: '',
-    CordinatorName: '',
-    CordinatorContact: '',
+    cordinatorName: '',
+    cordinatorContact: '',
     projectName: '',
     projectCordinatorName: '',
     projectCordinatorContact: '',
-    projectAddress: '',
+    projectCordinatorEmail: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target);
+    try{
+      console.log(managerInfo);
+      await axios.post('http://localhost:8080/api/wsb/addManager', managerInfo).then((res) => {
+        console.log(res);
+      }
+      );
+    }catch(error){
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {
@@ -102,26 +111,26 @@ const Manager = () => {
         />
       </Box>
       <Box sx={{ display: 'flex', mt: 2, mb: 2 }}>
-        <TextField
+      <TextField
           required
           label="Cordinator Name"
           variant="outlined"
           fullWidth
           type="text"
-          name="CordinatorName"
-          value={managerInfo.CordinatorName}
+          name="cordinatorName"
+          value={managerInfo.cordinatorName}
           onChange={handleChange}
           sx={{ mr: { md: 1 } }}
         />
         <TextField
           required
-          label="Cordinator Contact"
+          label="cordinator Contact"
           variant="outlined"
           fullWidth
           sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
           type="number"
-          name="CordinatorContact"
-          value={managerInfo.CordinatorContact}
+          name="cordinatorContact"
+          value={managerInfo.cordinatorContact}
           onChange={handleChange}
         />
       </Box>
