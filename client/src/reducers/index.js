@@ -10,6 +10,7 @@ import addOnService from './addOnService'
 import workPartnerAddOnService from './workPartnerAddOnServices'
 import workPartnerLongService from './workPartnerLongServices'
 import workPartnerShortService from './workPartnerShortServices'
+import product from './master/product'
 
 export const reducers = combineReducers({
     customerInfo,
@@ -21,5 +22,6 @@ export const reducers = combineReducers({
     addOnService,
     workPartnerAddOnService,
     workPartnerLongService,
-    workPartnerShortService
+    workPartnerShortService,
+    product
 });

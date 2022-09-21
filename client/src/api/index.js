@@ -42,3 +42,6 @@ export const updateWorkPartnerLongServices = (workPartnerLongServices) => API.pu
 
 export const getWorkPartnerShortServices = () => API.get('/getWorkPartnerShortServices');
 export const updateWorkPartnerShortServices = (workPartnerShortServices) => API.put('/updateWorkPartnerShortServices', workPartnerShortServices );
+
+export const addProduct = (product) => API.post('/addProduct', product );
+export const getProducts = () => API.get('/getProducts');

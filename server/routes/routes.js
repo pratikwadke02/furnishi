@@ -18,6 +18,8 @@ module.exports = (app) => {
     const manager = require('../controllers/master/Manager.controller.js');
     const archtDesigrCord = require('../controllers/master/Architect.Designer.Cordinator.controller.js');
 
+    const product = require('../controllers/master/product.controller.js');
+
 
     const toolsSiteSettings = require('../controllers/siteSettings/tools.siteSettings.controller.js');
     const workPhaseSiteSettings = require('../controllers/siteSettings/workPhase.siteSettings.controller.js');
@@ -84,6 +86,9 @@ module.exports = (app) => {
 
     router.post("/addArchtDesigrCord", archtDesigrCord.create);
     router.get("/getArchtDesigrCord", archtDesigrCord.findAll);
+
+    router.post("/addProduct", product.create);
+    router.get("/getProducts", product.findAll);
     
 
     app.use("/api/wsb", router);

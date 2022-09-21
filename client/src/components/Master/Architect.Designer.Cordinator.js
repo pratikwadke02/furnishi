@@ -18,15 +18,29 @@ const ArchitectDesignerCordinator = () => {
     projectCordinatorEmail: '',
   });
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
+    try {
       console.log(archtDesigrCordInfo);
       await axios.post('http://localhost:8080/api/wsb/addArchtDesigrCord', archtDesigrCordInfo).then((res) => {
         console.log(res);
-      }
-      );
-    }catch(error){
+      });
+      setArchtDesigrCordInfo({
+        name: '',
+        firmName: '',
+        firmAddress: '',
+        emailId: '',
+        contactOne: '',
+        contactTwo: '',
+        cordinatorName: '',
+        cordinatorContact: '',
+        projectName: '',
+        projectCordinatorName: '',
+        projectCordinatorContact: '',
+        projectCordinatorEmail: '',
+      });
+      alert('Architect/Designer/Cordinator Added Successfully');
+    } catch (error) {
       console.log(error);
     }
   };
@@ -38,7 +52,7 @@ const ArchitectDesignerCordinator = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2 }}>
+      {/* <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2 }}>
         <TextField
           required
           label="Name"
@@ -110,8 +124,8 @@ const ArchitectDesignerCordinator = () => {
           onChange={handleChange}
         />
       </Box>
-      <Box sx={{ display: 'flex', mt: 2, mb: 2 }}>
-      <TextField
+      <Box sx={{ display: 'flex',flexDirection: { xs: 'column', md: 'row' }, mt: 2, mb: 2 }}>
+        <TextField
           required
           label="Cordinator Name"
           variant="outlined"
@@ -133,12 +147,12 @@ const ArchitectDesignerCordinator = () => {
           value={archtDesigrCordInfo.cordinatorContact}
           onChange={handleChange}
         />
-      </Box>
-      <Box sx={{ width: '100%', mt: 2, mb: 2 }}>
+      </Box> */}
+      {/* <Box sx={{ width: '100%', mt: 2, mb: 2 }}>
         <Typography variant="h6" sx={{ mb: 2 }}>
           Project Details
         </Typography>
-      </Box>
+      </Box> */}
       <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2 }}>
         <TextField
           required

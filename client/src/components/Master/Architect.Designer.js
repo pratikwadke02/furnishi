@@ -18,15 +18,29 @@ const ArchitectDesigner = () => {
     projectCordinatorEmail: '',
   });
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
+    try {
       console.log(archtDesigrInfo);
       await axios.post('http://localhost:8080/api/wsb/addArchtDesigr', archtDesigrInfo).then((res) => {
         console.log(res);
-      }
-      );
-    }catch(error){
+      });
+      setArchtDesigrInfo({
+        name: '',
+        firmName: '',
+        firmAddress: '',
+        emailId: '',
+        contactOne: '',
+        contactTwo: '',
+        cordinatorName: '',
+        cordinatorContact: '',
+        projectName: '',
+        projectCordinatorName: '',
+        projectCordinatorContact: '',
+        projectCordinatorEmail: '',
+      });
+      alert('Architect/Designer Added Successfully');
+    } catch (error) {
       console.log(error);
     }
   };
@@ -110,7 +124,15 @@ const ArchitectDesigner = () => {
           onChange={handleChange}
         />
       </Box>
-      <Box sx={{ display: 'flex', mt: 2, mb: 2 }}>
+      <Box sx={{ width: '100%', mt: 2, mb: 2 }}>
+        <Typography 
+          variant="h6" 
+          sx={{ mb: 2 }}
+        >
+          Cordinator Details
+        </Typography>
+      </Box>
+      <Box sx={{ display: 'flex',flexDirection: { xs: 'column', md: 'row' }, mt: 2, mb: 2 }}>
         <TextField
           required
           label="Cordinator Name"
@@ -134,7 +156,7 @@ const ArchitectDesigner = () => {
           onChange={handleChange}
         />
       </Box>
-      <Box sx={{ width: '100%', mt: 2, mb: 2 }}>
+      {/* <Box sx={{ width: '100%', mt: 2, mb: 2 }}>
         <Typography variant="h6" sx={{ mb: 2 }}>
           Project Details
         </Typography>
@@ -186,7 +208,7 @@ const ArchitectDesigner = () => {
           value={archtDesigrInfo.projectCordinatorEmail}
           onChange={handleChange}
         />
-      </Box>
+      </Box> */}
 
       <Box>
         <Button variant="contained" color="primary" type="submit">
