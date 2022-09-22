@@ -45,3 +45,9 @@ export const updateWorkPartnerShortServices = (workPartnerShortServices) => API.
 
 export const addProduct = (product) => API.post('/addProduct', product );
 export const getProducts = () => API.get('/getProducts');
+
+export const addManager = (managerInfo) => API.post('/addManager', managerInfo );
+export const getManagers = () => API.get('/getManagers');
+
+export const addCordinator = (cordinatorInfo) => API.post('/addCordinator', cordinatorInfo );
+export const getCordinators = () => API.get('/getCordinators');
