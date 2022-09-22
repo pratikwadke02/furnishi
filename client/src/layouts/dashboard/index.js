@@ -16,6 +16,9 @@ import { getAddOnServices } from '../../actions/addOnService';
 import { getWorkPartnerAddOnServices } from '../../actions/workPartner/addOnServices';
 import { getWorkPartnerLongServices } from '../../actions/workPartner/longServices';
 import { getWorkPartnerShortServices } from '../../actions/workPartner/shortServices';
+import { getProducts } from '../../actions/master/product';
+import { getManagers } from '../../actions/master/manager';
+import { getCordinators } from '../../actions/master/cordinator';
 
 //
 import DashboardNavbar from './DashboardNavbar';
@@ -65,6 +68,9 @@ export default function DashboardLayout() {
       dispatch(getWorkPartnerAddOnServices());
       dispatch(getWorkPartnerLongServices());
       dispatch(getWorkPartnerShortServices());
+      dispatch(getProducts());
+      dispatch(getManagers());
+      dispatch(getCordinators());
     };
     getReduxData();
   }, [dispatch]);

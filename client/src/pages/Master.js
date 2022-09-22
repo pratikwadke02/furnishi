@@ -25,6 +25,7 @@ import {
   Tab,
   Tabs,
 } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -71,17 +72,10 @@ function a11yProps(index) {
 }
 
 const Master = () => {
-  const [rateMasterData, setRateMasterData] = useState({
-    state: '',
-    district: '',
-    pincode: '',
-    serviceType: '',
-    serviceName: '',
-    installationType: '',
-    installableArea: '',
-    lightConnection: '',
-    floatingShelf: '',
-  });
+
+  const products = (useSelector(state => state.product.products));
+  const managers = (useSelector(state => state.manager.managers));
+  const cordinators = (useSelector(state => state.cordinator.cordinators));
 
   const [headTab, setHeadTab] = useState(0);
   const [subTab, setSubTab] = useState(0);
@@ -91,18 +85,18 @@ const Master = () => {
     setHeadTab(newValue);
   };
 
-  const handleSubtabChange = (event, newValue) => {
-    setSubTab(newValue);
-  };
+  // const handleSubtabChange = (event, newValue) => {
+  //   setSubTab(newValue);
+  // };
 
-  const handleChange = ({ currentTarget: input }) => {
-    setRateMasterData({ ...rateMasterData, [input.name]: input.value });
-    console.log(rateMasterData);
-  };
+  // const handleChange = ({ currentTarget: input }) => {
+  //   setRateMasterData({ ...rateMasterData, [input.name]: input.value });
+  //   console.log(rateMasterData);
+  // };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  // };
 
   return (
     <>
@@ -131,13 +125,13 @@ const Master = () => {
                 <ArchitectDesigner />
               </TabPanel>
               <TabPanel value={headTab} index={1}>
-                <ArchitectDesignerCordinator />
+                <ArchitectDesignerCordinator cordinators={cordinators} />
               </TabPanel>
               <TabPanel value={headTab} index={2}>
-                <Manager />
+                <Manager managers={managers} />
               </TabPanel>
               <TabPanel value={headTab} index={3}>
-                <Product />
+                <Product products={products} />
               </TabPanel>
               <TabPanel value={headTab} index={4}>
                 <Customer />

@@ -82,7 +82,7 @@ module.exports = (app) => {
     router.get("/getArchtDesigr", archtDesigr.findAll);
 
     router.post("/addManager", manager.create);
-    router.get("/getManager", manager.findAll);
+    router.get("/getManagers", manager.findAll);
 
     router.post("/addArchtDesigrCord", archtDesigrCord.create);
     router.get("/getArchtDesigrCord", archtDesigrCord.findAll);
