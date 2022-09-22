@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addManager } from '../../actions/master/manager';
 
 const Manager = () => {
   const [managerInfo, setManagerInfo] = useState({
     projectName: '',
-    projectManagerName: '',
-    projectManagerContact: '',
-    projectManagerEmail: '',
+    managerName: '',
+    managerContact: '',
+    managerEmail: '',
   });
 
+  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       console.log(managerInfo);
-      await axios.post('http://localhost:8080/api/wsb/addManager', managerInfo).then((res) => {
-        console.log(res);
-      });
+      dispatch(addManager(managerInfo));
       setManagerInfo({
         projectName: '',
-        projectManagerName: '',
-        projectManagerContact: '',
-        projectManagerEmail: '',
+        managerName: '',
+        managerContact: '',
+        managerEmail: '',
       });
       alert('Manager Added Successfully');
     } catch (error) {
@@ -55,8 +56,8 @@ const Manager = () => {
           fullWidth
           sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
           type="text"
-          name="projectManagerName"
-          value={managerInfo.projectManagerName}
+          name="managerName"
+          value={managerInfo.managerName}
           onChange={handleChange}
         />
       </Box>
@@ -68,8 +69,8 @@ const Manager = () => {
           fullWidth
           sx={{ mr: { md: 1 } }}
           type="number"
-          name="projectManagerContact"
-          value={managerInfo.projectManagerContact}
+          name="managerContact"
+          value={managerInfo.managerContact}
           onChange={handleChange}
         />
         <TextField
@@ -79,8 +80,8 @@ const Manager = () => {
           fullWidth
           sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
           type="email"
-          name="projectManagerEmail"
-          value={managerInfo.projectManagerEmail}
+          name="managerEmail"
+          value={managerInfo.managerEmail}
           onChange={handleChange}
         />
       </Box>

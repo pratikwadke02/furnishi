@@ -2,17 +2,13 @@ const db = require('../../models');
 const ArchtDesigr = db.archtDesigr;
 
 exports.create = async (req, res) => {
-    console.log(req.body);
-    ArchtDesigr.create(req.body).then(data => {
-        res.send(
-            {
-                message: "Architect, Designer and Cordinator added",
-            }
-        );
-    }).catch(err => {
-        res.send(err);
-        console.log(err);
-    });
+    try{
+        const archtDesigr = await ArchtDesigr.create(req.body);
+        res.status(201).send(archtDesigr);
+    }
+    catch(error){
+        res.status(500).send(error);
+    }
 }
 
 exports.findAll = async (req, res) => {

@@ -49,5 +49,5 @@ export const getProducts = () => API.get('/getProducts');
 export const addManager = (managerInfo) => API.post('/addManager', managerInfo );
 export const getManagers = () => API.get('/getManagers');
 
-export const addCordinator = (cordinatorInfo) => API.post('/addCordinator', cordinatorInfo );
-export const getCordinators = () => API.get('/getCordinators');
+export const addCordinator = (cordinatorInfo) => API.post('/addArchtDesigrCord', cordinatorInfo );
+export const getCordinators = () => API.get('/getArchtDesigrCord');

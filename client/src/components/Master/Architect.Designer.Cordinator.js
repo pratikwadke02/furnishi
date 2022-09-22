@@ -1,43 +1,29 @@
 import React from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addCordinator } from '../../actions/master/cordinator';
 
 const ArchitectDesignerCordinator = () => {
   const [archtDesigrCordInfo, setArchtDesigrCordInfo] = React.useState({
-    name: '',
-    firmName: '',
-    firmAddress: '',
-    emailId: '',
-    contactOne: '',
-    contactTwo: '',
+    projectName: '',
     cordinatorName: '',
     cordinatorContact: '',
-    projectName: '',
-    projectCordinatorName: '',
-    projectCordinatorContact: '',
-    projectCordinatorEmail: '',
+    cordinatorEmail: '',
   });
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       console.log(archtDesigrCordInfo);
-      await axios.post('http://localhost:8080/api/wsb/addArchtDesigrCord', archtDesigrCordInfo).then((res) => {
-        console.log(res);
-      });
+      dispatch(addCordinator(archtDesigrCordInfo));
       setArchtDesigrCordInfo({
-        name: '',
-        firmName: '',
-        firmAddress: '',
-        emailId: '',
-        contactOne: '',
-        contactTwo: '',
+        projectName: '',
         cordinatorName: '',
         cordinatorContact: '',
-        projectName: '',
-        projectCordinatorName: '',
-        projectCordinatorContact: '',
-        projectCordinatorEmail: '',
+        cordinatorEmail: '',
       });
       alert('Architect/Designer/Cordinator Added Successfully');
     } catch (error) {
@@ -52,107 +38,6 @@ const ArchitectDesignerCordinator = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2 }}>
-        <TextField
-          required
-          label="Name"
-          variant="outlined"
-          fullWidth
-          sx={{ mr: { md: 1 } }}
-          type="text"
-          name="name"
-          value={archtDesigrCordInfo.name}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Firm Name"
-          required
-          variant="outlined"
-          fullWidth
-          sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
-          type="text"
-          name="firmName"
-          value={archtDesigrCordInfo.firmName}
-          onChange={handleChange}
-        />
-      </Box>
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mt: 2, mb: 2 }}>
-        <TextField
-          required
-          label="Firm Address"
-          variant="outlined"
-          fullWidth
-          sx={{ mr: { md: 1 } }}
-          type="text"
-          name="firmAddress"
-          value={archtDesigrCordInfo.firmAddress}
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          label="Email Id"
-          variant="outlined"
-          fullWidth
-          sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
-          type="email"
-          name="emailId"
-          value={archtDesigrCordInfo.emailId}
-          onChange={handleChange}
-        />
-      </Box>
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2 }}>
-        <TextField
-          required
-          label="Contact One"
-          variant="outlined"
-          fullWidth
-          sx={{ mr: { md: 1 } }}
-          type="number"
-          name="contactOne"
-          value={archtDesigrCordInfo.contactOne}
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          label="Contact Two"
-          variant="outlined"
-          fullWidth
-          sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
-          type="number"
-          name="contactTwo"
-          value={archtDesigrCordInfo.contactTwo}
-          onChange={handleChange}
-        />
-      </Box>
-      <Box sx={{ display: 'flex',flexDirection: { xs: 'column', md: 'row' }, mt: 2, mb: 2 }}>
-        <TextField
-          required
-          label="Cordinator Name"
-          variant="outlined"
-          fullWidth
-          type="text"
-          name="cordinatorName"
-          value={archtDesigrCordInfo.cordinatorName}
-          onChange={handleChange}
-          sx={{ mr: { md: 1 } }}
-        />
-        <TextField
-          required
-          label="cordinator Contact"
-          variant="outlined"
-          fullWidth
-          sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
-          type="number"
-          name="cordinatorContact"
-          value={archtDesigrCordInfo.cordinatorContact}
-          onChange={handleChange}
-        />
-      </Box> */}
-      {/* <Box sx={{ width: '100%', mt: 2, mb: 2 }}>
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          Project Details
-        </Typography>
-      </Box> */}
       <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2 }}>
         <TextField
           required
@@ -172,8 +57,8 @@ const ArchitectDesignerCordinator = () => {
           fullWidth
           sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
           type="text"
-          name="projectCordinatorName"
-          value={archtDesigrCordInfo.projectCordinatorName}
+          name="cordinatorName"
+          value={archtDesigrCordInfo.cordinatorName}
           onChange={handleChange}
         />
       </Box>
@@ -185,8 +70,8 @@ const ArchitectDesignerCordinator = () => {
           fullWidth
           sx={{ mr: { md: 1 } }}
           type="number"
-          name="projectCordinatorContact"
-          value={archtDesigrCordInfo.projectCordinatorContact}
+          name="cordinatorContact"
+          value={archtDesigrCordInfo.cordinatorContact}
           onChange={handleChange}
         />
         <TextField
@@ -196,8 +81,8 @@ const ArchitectDesignerCordinator = () => {
           fullWidth
           sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
           type="email"
-          name="projectCordinatorEmail"
-          value={archtDesigrCordInfo.projectCordinatorEmail}
+          name="cordinatorEmail"
+          value={archtDesigrCordInfo.cordinatorEmail}
           onChange={handleChange}
         />
       </Box>

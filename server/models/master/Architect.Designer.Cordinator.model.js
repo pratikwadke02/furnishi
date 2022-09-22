@@ -8,13 +8,13 @@ module.exports = (sequelize, Sequelize) => {
         projectName: {
             type: Sequelize.STRING,
         },
-        projectCordinatorName: {
+        cordinatorName: {
             type: Sequelize.STRING,
         },
-        projectCordinatorContact: {
+        cordinatorContact: {
             type: Sequelize.STRING,
         },
-        projectCordinatorEmail: {
+        cordinatorEmail: {
             type: Sequelize.STRING,
         },
     })

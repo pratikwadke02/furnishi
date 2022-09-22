@@ -31,6 +31,7 @@ db.aadharImage.hasMany(db.workPartnerAdmin);
 db.archtDesigr = require('./master/Architect.Designer.model.js')(sequelize, Sequelize);
 db.manager = require('./master/Manager.model.js')(sequelize, Sequelize);
 db.archtDesigrCord = require('./master/Architect.Designer.Cordinator.model.js')(sequelize, Sequelize);
+db.product = require('./master/Product.model.js')(sequelize, Sequelize);
 
 db.addOnServices = require('./addOnServices.model.js')(sequelize, Sequelize);
 db.longServices = require('./longServices.model.js')(sequelize, Sequelize);
