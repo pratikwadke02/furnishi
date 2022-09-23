@@ -76,6 +76,7 @@ const Master = () => {
   const products = (useSelector(state => state.product.products));
   const managers = (useSelector(state => state.manager.managers));
   const cordinators = (useSelector(state => state.cordinator.cordinators));
+  const archDesigrs = (useSelector(state => state.archtDesigr.archDesigrs));
 
   const [headTab, setHeadTab] = useState(0);
   const [subTab, setSubTab] = useState(0);
@@ -122,7 +123,7 @@ const Master = () => {
                 </Tabs>
               </Box>
               <TabPanel value={headTab} index={0}>
-                <ArchitectDesigner cordinators={cordinators} />
+                <ArchitectDesigner cordinators={cordinators} archDesigrs={archDesigrs} />
               </TabPanel>
               <TabPanel value={headTab} index={1}>
                 <ArchitectDesignerCordinator cordinators={cordinators} />

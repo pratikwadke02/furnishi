@@ -8,9 +8,9 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import { applyMiddleware,createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import { reducers } from './reducers';
-
 //
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -18,7 +18,7 @@ import reportWebVitals from './reportWebVitals';
 
 // ----------------------------------------------------------------------
 
-const store = createStore(reducers, compose(applyMiddleware(thunk)));
+const store = createStore(reducers, compose(applyMiddleware(thunk), composeWithDevTools()));
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

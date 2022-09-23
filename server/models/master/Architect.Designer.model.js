@@ -29,6 +29,12 @@ module.exports = (sequelize, Sequelize) => {
         cordinatorContact: {
             type: Sequelize.STRING,
         },
+        cordinatorEmail: {
+            type: Sequelize.STRING,
+        },
+        projectName: {
+            type: Sequelize.STRING,
+        },
     })
     return ArchtDesigr;
 }

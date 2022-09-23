@@ -5,12 +5,12 @@ const archtDesigrReducer = (state = { archDesigrs: [] }, action) => {
         case actionType.ADD_ARCHITECT_DESIGNER:
             return {
                 ...state,
-                archDesgrs: action.payload
+                archDesigrs: action.payload
             }
         case actionType.GET_ALL_ARCHITECT_DESIGNERS:
             return {
                 ...state,
-                archDesgrs: action.payload
+                archDesigrs: action.payload
             }
         default:
             return state;
