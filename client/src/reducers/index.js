@@ -13,6 +13,7 @@ import workPartnerShortService from './workPartnerShortServices'
 import product from './master/product'
 import manager from './master/manager'
 import cordinator from './master/cordinator'
+import archtDesigr from './master/archDesigr'
 
 export const reducers = combineReducers({
     customerInfo,
@@ -27,5 +28,6 @@ export const reducers = combineReducers({
     workPartnerShortService,
     product,
     manager,
-    cordinator
+    cordinator,
+    archtDesigr
 });

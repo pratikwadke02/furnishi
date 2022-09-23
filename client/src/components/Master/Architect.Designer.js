@@ -1,8 +1,11 @@
 import React from 'react';
-import { Box, TextField, Button, Typography } from '@mui/material';
+import { Box, TextField, Button, Typography, Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 import axios from 'axios';
 
-const ArchitectDesigner = () => {
+const ArchitectDesigner = (props) => {
+
+  const {cordinators} = props;
+
   const [archtDesigrInfo, setArchtDesigrInfo] = React.useState({
     name: '',
     firmName: '',
@@ -12,10 +15,8 @@ const ArchitectDesigner = () => {
     contactTwo: '',
     cordinatorName: '',
     cordinatorContact: '',
+    cordinatorEmail: '',
     projectName: '',
-    projectCordinatorName: '',
-    projectCordinatorContact: '',
-    projectCordinatorEmail: '',
   });
 
   const handleSubmit = async (e) => {
@@ -34,10 +35,8 @@ const ArchitectDesigner = () => {
         contactTwo: '',
         cordinatorName: '',
         cordinatorContact: '',
+        cordinatorEmail: '',
         projectName: '',
-        projectCordinatorName: '',
-        projectCordinatorContact: '',
-        projectCordinatorEmail: '',
       });
       alert('Architect/Designer Added Successfully');
     } catch (error) {
@@ -47,6 +46,16 @@ const ArchitectDesigner = () => {
 
   const handleChange = (e) => {
     setArchtDesigrInfo({ ...archtDesigrInfo, [e.target.name]: e.target.value });
+    console.log(archtDesigrInfo);
+  };
+
+  const handleCordinatorChange = (e) => {
+    cordinators.map((cordinator) => {
+      if(cordinator.id === e.target.value){
+        setArchtDesigrInfo({ ...archtDesigrInfo, cordinatorName: cordinator.cordinatorName, cordinatorContact: cordinator.cordinatorContact, cordinatorEmail: cordinator.cordinatorEmail, projectName: cordinator.projectName });
+      }
+      return null;
+    })
     console.log(archtDesigrInfo);
   };
 
@@ -125,67 +134,50 @@ const ArchitectDesigner = () => {
         />
       </Box>
       <Box sx={{ width: '100%', mt: 2, mb: 2 }}>
-        <Typography 
-          variant="h6" 
-          sx={{ mb: 2 }}
-        >
+        <Typography variant="h6" sx={{ mb: 2 }}>
           Cordinator Details
         </Typography>
       </Box>
-      <Box sx={{ display: 'flex',flexDirection: { xs: 'column', md: 'row' }, mt: 2, mb: 2 }}>
-        <TextField
+      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mt: 2, mb: 2 }}>
+        <FormControl fullWidth sx={{ mr: { md: 1 } }}>
+          <InputLabel id='demo-simple-select-label'>Cordinator Name</InputLabel>
+        <Select
           required
+          labelId='demo-simple-select-label'
           label="Cordinator Name"
           variant="outlined"
           fullWidth
           type="text"
           name="cordinatorName"
-          value={archtDesigrInfo.cordinatorName}
-          onChange={handleChange}
-          sx={{ mr: { md: 1 } }}
-        />
-        <TextField
-          required
-          label="cordinator Contact"
-          variant="outlined"
-          fullWidth
-          sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
-          type="number"
-          name="cordinatorContact"
-          value={archtDesigrInfo.cordinatorContact}
-          onChange={handleChange}
-        />
+          value={cordinators.cordinatorName}
+          onChange={handleCordinatorChange}
+        >
+          {
+            cordinators.map((cordinator, index) => {
+              return <MenuItem key={index} value={cordinator.id}>{cordinator.cordinatorName}</MenuItem>
+            })
+          }
+        </Select>
+        </FormControl>
+        {
+          archtDesigrInfo.cordinatorName !== '' ? (
+            <TextField
+            required
+            label="Project Name"
+            variant="outlined"
+            fullWidth
+            sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
+            type="text"
+            name="projectName"
+            value={archtDesigrInfo.projectName}
+            onChange={handleChange}
+          />
+          ) : <Box sx={{width:'100%', ml:1}}/>
+        }
       </Box>
-      {/* <Box sx={{ width: '100%', mt: 2, mb: 2 }}>
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          Project Details
-        </Typography>
-      </Box>
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2 }}>
-        <TextField
-          required
-          label="Project Name"
-          variant="outlined"
-          fullWidth
-          sx={{ mr: { md: 1 } }}
-          type="text"
-          name="projectName"
-          value={archtDesigrInfo.projectName}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Project Cordinator Name"
-          required
-          variant="outlined"
-          fullWidth
-          sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
-          type="text"
-          name="projectCordinatorName"
-          value={archtDesigrInfo.projectCordinatorName}
-          onChange={handleChange}
-        />
-      </Box>
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mt: 2, mb: 2 }}>
+      {
+        archtDesigrInfo.cordinatorName !== '' ? (
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mt: 2, mb: 2 }}>
         <TextField
           required
           label="Project Cordinator Contact"
@@ -194,7 +186,7 @@ const ArchitectDesigner = () => {
           sx={{ mr: { md: 1 } }}
           type="number"
           name="projectCordinatorContact"
-          value={archtDesigrInfo.projectCordinatorContact}
+          value={archtDesigrInfo.cordinatorContact}
           onChange={handleChange}
         />
         <TextField
@@ -205,11 +197,12 @@ const ArchitectDesigner = () => {
           sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
           type="email"
           name="projectCordinatorEmail"
-          value={archtDesigrInfo.projectCordinatorEmail}
+          value={archtDesigrInfo.cordinatorEmail}
           onChange={handleChange}
         />
-      </Box> */}
-
+      </Box> 
+        ) : null
+      }
       <Box>
         <Button variant="contained" color="primary" type="submit">
           Submit

@@ -51,3 +51,6 @@ export const getManagers = () => API.get('/getManagers');
 
 export const addCordinator = (cordinatorInfo) => API.post('/addArchtDesigrCord', cordinatorInfo );
 export const getCordinators = () => API.get('/getArchtDesigrCord');
+
+export const addArchtDesigr = (archtDesigrInfo) => API.post('/addArchtDesigr', archtDesigrInfo );
+export const getArchtDesigrs = () => API.get('/getArchtDesigr');

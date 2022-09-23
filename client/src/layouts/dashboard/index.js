@@ -19,6 +19,7 @@ import { getWorkPartnerShortServices } from '../../actions/workPartner/shortServ
 import { getProducts } from '../../actions/master/product';
 import { getManagers } from '../../actions/master/manager';
 import { getCordinators } from '../../actions/master/cordinator';
+import { getArchtDesigrs } from '../../actions/master/archDesgr';
 
 //
 import DashboardNavbar from './DashboardNavbar';
@@ -71,6 +72,7 @@ export default function DashboardLayout() {
       dispatch(getProducts());
       dispatch(getManagers());
       dispatch(getCordinators());
+      dispatch(getArchtDesigrs());
     };
     getReduxData();
   }, [dispatch]);

@@ -122,7 +122,7 @@ const Master = () => {
                 </Tabs>
               </Box>
               <TabPanel value={headTab} index={0}>
-                <ArchitectDesigner />
+                <ArchitectDesigner cordinators={cordinators} />
               </TabPanel>
               <TabPanel value={headTab} index={1}>
                 <ArchitectDesignerCordinator cordinators={cordinators} />
