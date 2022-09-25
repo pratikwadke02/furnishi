@@ -58,3 +58,9 @@ export const getCordinators = () => API.get('/getArchtDesigrCord');
 
 export const addArchtDesigr = (archtDesigrInfo) => API.post('/addArchtDesigr', archtDesigrInfo );
 export const getArchtDesigrs = () => API.get('/getArchtDesigr');
+
+export const addEnquiry = (enquiryInfo) => API.post('/addEnquiry', enquiryInfo );
+export const getEnquiries = () => API.get('/getEnquiries');
+
+export const addOrder = (orderInfo) => API.post('/addOrder', orderInfo );
+export const getOrders = () => API.get('/getOrders');

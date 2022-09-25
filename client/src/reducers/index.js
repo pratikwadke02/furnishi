@@ -15,6 +15,9 @@ import manager from './master/manager'
 import cordinator from './master/cordinator'
 import archtDesigr from './master/archDesigr'
 import auth from './auth/auth'
+import enquiry from './enquiry/enquiry'
+import order from './order/order'
+
 
 export const reducers = combineReducers({
     customerInfo,
@@ -31,5 +34,7 @@ export const reducers = combineReducers({
     manager,
     cordinator,
     archtDesigr,
-    auth
+    auth,
+    enquiry,
+    order
 });
