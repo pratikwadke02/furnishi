@@ -1,9 +1,12 @@
 import { useRef, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@mui/material';
+
+import { useDispatch } from 'react-redux';
 // components
+import { logout } from '../../actions/auth/auth';
 import MenuPopover from '../../components/MenuPopover';
 // mocks_
 import account from '../../_mock/account';
@@ -42,6 +45,18 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(null);
   };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    try{
+      dispatch(logout(navigate));
+    }catch(err){
+      console.log(err);
+    }
+  };
+
 
   return (
     <>
@@ -101,7 +116,8 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        
+        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </MenuPopover>

@@ -5,9 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Stack, IconButton, InputAdornment } from '@mui/material';
+import { Stack, IconButton, InputAdornment, TextField, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
+import { useDispatch } from 'react-redux';
+
+import { register } from '../../../actions/auth/auth';
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
@@ -25,40 +28,58 @@ export default function RegisterForm() {
     password: Yup.string().required('Password is required'),
   });
 
-  const defaultValues = {
+  const [registerForm, setRegisterForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
+  });
+
+  const handleChange = (event) => {
+    setRegisterForm({
+      ...registerForm,
+      [event.target.name]: event.target.value,
+    });
   };
+
 
   const methods = useForm({
     resolver: yupResolver(RegisterSchema),
-    defaultValues,
+    // defaultValues,
   });
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
+  // const {
+  //   handleSubmit,
+  //   formState: { isSubmitting },
+  // } = methods;
 
-  const onSubmit = async () => {
-    navigate('/dashboard', { replace: true });
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(registerForm);
+    try{
+      dispatch(register(registerForm, navigate));
+    }catch(error){
+      console.log(error);
+    }
   };
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={handleSubmit}>
       <Stack spacing={3}>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <RHFTextField name="firstName" label="First name" />
-          <RHFTextField name="lastName" label="Last name" />
+          <TextField name="firstName" label="First name" fullWidth value={registerForm.firstName} onChange={handleChange} />
+          <TextField name="lastName" label="Last name" fullWidth value={registerForm.lastName} onChange={handleChange} />
         </Stack>
 
-        <RHFTextField name="email" label="Email address" />
+        <TextField name="email" label="Email address" value={registerForm.email} onChange={handleChange} />
 
-        <RHFTextField
+        <TextField
           name="password"
           label="Password"
+          value={registerForm.password}
+          onChange={handleChange}
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -71,9 +92,9 @@ export default function RegisterForm() {
           }}
         />
 
-        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+        <Button fullWidth size="large" type="submit" variant="contained" >
           Register
-        </LoadingButton>
+        </Button>
       </Stack>
     </FormProvider>
   );

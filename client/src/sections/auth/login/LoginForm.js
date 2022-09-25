@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Link, Stack, IconButton, InputAdornment } from '@mui/material';
+import { Link, Stack, IconButton, InputAdornment, TextField, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { useDispatch } from 'react-redux';
+import { login } from '../../../actions/auth/auth';
 // components
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
@@ -14,6 +16,8 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
+  const remember = true;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -23,34 +27,62 @@ export default function LoginForm() {
     password: Yup.string().required('Password is required'),
   });
 
-  const defaultValues = {
-    email: '',
-    password: '',
-    remember: true,
-  };
+  // const defaultValues = {
+  //   email: '',
+  //   password: '',
+  //   remember: true,
+  // };
+
+  const [loginForm, setLoginForm] = useState(
+    {
+      email: '',
+      password: '',
+    },
+  );
 
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
-    defaultValues,
+    // defaultValues,
   });
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
+  const handleChange = (event) => {
+    setLoginForm({
+      ...loginForm,
+      [event.target.name]: event.target.value,
+    });
+    console.log(loginForm);
+  };
 
-  const onSubmit = async () => {
-    navigate('/dashboard', { replace: true });
+  // const {
+  //   handleSubmit,
+  //   formState: { isSubmitting },
+  // } = methods;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(loginForm);
+    try{
+      dispatch(login(loginForm, navigate));
+    }catch(err){
+      console.log(err);
+    }
   };
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={handleSubmit}>
       <Stack spacing={3}>
-        <RHFTextField name="email" label="Email address" />
+        <TextField 
+        name="email" 
+        label="Email address" 
+        value={loginForm.email}
+        onChange={handleChange}
+        />
 
-        <RHFTextField
+        <TextField
           name="password"
           label="Password"
+          value={loginForm.password}
+          onChange={handleChange}
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -65,15 +97,15 @@ export default function LoginForm() {
       </Stack>
 
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-        <RHFCheckbox name="remember" label="Remember me" />
+        <RHFCheckbox name="remember" label="Remember me"/>
         <Link variant="subtitle2" underline="hover">
           Forgot password?
         </Link>
       </Stack>
 
-      <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+      <Button fullWidth size="large" type="submit" variant="contained" >
         Login
-      </LoadingButton>
+      </Button>
     </FormProvider>
   );
 }
