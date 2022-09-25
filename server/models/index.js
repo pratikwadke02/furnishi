@@ -34,6 +34,7 @@ db.archtDesigrCord = require('./master/Architect.Designer.Cordinator.model.js')(
 db.product = require('./master/Product.model.js')(sequelize, Sequelize);
 db.enquiry = require('./enquiry/enquiry.model.js')(sequelize, Sequelize);
 db.order = require('./order/order.model.js')(sequelize, Sequelize);
+db.user = require('./user.model.js')(sequelize, Sequelize);
 
 db.addOnServices = require('./addOnServices.model.js')(sequelize, Sequelize);
 db.longServices = require('./longServices.model.js')(sequelize, Sequelize);

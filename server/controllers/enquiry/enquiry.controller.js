@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../../models");
 const Enquiry = db.enquiry;
 
 exports.create = (req, res) => {

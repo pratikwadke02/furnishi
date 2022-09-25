@@ -26,6 +26,9 @@ import SurveyTicket from './pages/SurveyTicket';
 
 // ----------------------------------------------------------------------
 
+const user = (JSON.parse(localStorage.getItem('user')));
+
+
 export default function Router() {
   return useRoutes([
     {
@@ -63,7 +66,7 @@ export default function Router() {
       path: '/',
       element: <LogoOnlyLayout />,
       children: [
-        { path: '/', element: <Navigate to="/dashboard/app" /> },
+        { path: '/', element: user ? <Navigate to="/dashboard/app" /> : <Navigate to="/login" /> },
         { path: '404', element: <NotFound /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],

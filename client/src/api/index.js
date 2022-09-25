@@ -13,6 +13,9 @@ API.interceptors.request.use((req) => {
     return Promise.reject(error);
 } );
 
+export const login = (authInfo) => API.post("/login", authInfo);
+export const register = (authInfo) => API.post("/register", authInfo);
+
 export const addCustomerInfo = (customerInfo) => API.post('/addCustomerInfo', customerInfo );
 export const getCustomerInfo = () => API.get('/getCustomerInfo');
 

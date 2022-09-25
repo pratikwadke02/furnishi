@@ -1,3 +1,6 @@
+export const AUTH = 'AUTH';
+export const LOGOUT = 'LOGOUT';
+
 export const ADD_CUSTOMER_INFO = 'ADD_CUSTOMER_INFO';
 export const GET_CUSTOMER_INFO = 'GET_CUSTOMER_INFO';
 
