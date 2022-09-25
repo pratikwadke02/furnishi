@@ -29,20 +29,21 @@ import Page from '../Page';
 // import Date from '../components/Date';
 
 const NewEnquiry = () => {
-  const [product, setProduct] = useState({
-    name: '',
-    quantity: '',
-    price: '',
-    discountPrice: '',
-    description: '',
+  const user = JSON.parse(localStorage.getItem('profile')).data;
+  console.log(user)
+
+
+  const [enquiry, setEnquiry] = useState({
+    clientName: user.firstName
+    
   });
 
   const handleChange = ({ currentTarget: input }) => {
-    setProduct({
-      ...product,
+    setEnquiry({
+      ...enquiry,
       [input.name]: input.value,
     });
-    console.log(product);
+    console.log(enquiry);
   };
 
   const handleSubmit = async (e) => {

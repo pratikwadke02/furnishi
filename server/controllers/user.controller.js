@@ -111,8 +111,15 @@ exports.updatePassword = async(req, res) => {
                 email: req.body.email,
             }
         });
+        const userData = {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            password: hashedPassword,
+        }
         res.send({
-            data: updatedUser,
+            data: userData,
         });
     }catch(error){
         console.log(error);

@@ -4,6 +4,7 @@ import * as api from '../../api/index';
 export const login = (authInfo, router) => async(dispatch) => {
     try{
         const {data} = await api.login(authInfo);
+        console.log(data);
         dispatch({ type : AUTH, data });
         router('/dashboard/app');
     }catch(error){
@@ -33,6 +34,7 @@ export const logout = (router) => async(dispatch) => {
 export const updatePassword = (passwordInfo) => async(dispatch) => {
     try{
         const {data} = await api.updatePassword(passwordInfo);
+        console.log(data);
         dispatch({ type : AUTH, data });
     }catch(error){
         console.log(error);
