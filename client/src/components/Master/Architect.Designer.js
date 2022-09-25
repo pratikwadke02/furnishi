@@ -33,8 +33,9 @@ const TABLE_HEAD = [
   { id: 'firmAddress', label: 'Firm Address', alignRight: true },
   { id: 'emailId', label: 'emailId', alignRight: true },
   { id: 'contact', label: 'Contact', alignRight: true },
-  { id: 'cordinatorName', label: 'Cordinator Name', alignRight: true },
-  { id: '' },
+  { id: 'cordiantorName', label: 'Cordinator Name', alignRight: true },
+  { id: 'projectName', label: 'Project Name', alignRight: true },
+  { id: 'cordinatorDetails', label: 'Cordinator Details', alignRight: true },
 ];
 
 // ----------------------------------------------------------------------
@@ -361,7 +362,7 @@ const ArchitectDesigner = (props) => {
     />
     <TableBody>
       {archDesigrsTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((custInfo) => {
-        const { id, name, firmName, firmAddress,emailId, contactOne, contactTwo, cordinatorName } = custInfo;
+        const { id, name, firmName, firmAddress,emailId, contactOne, contactTwo, cordinatorName, cordinatorContact, cordinatorEmail, projectName } = custInfo;
         const isItemSelected = selected.indexOf(id) !== -1;
 
         return (
@@ -397,13 +398,18 @@ const ArchitectDesigner = (props) => {
               </Box>
               </TableCell>
             <TableCell align="left">{cordinatorName}</TableCell>
-             <TableCell align="right">
-              {/* <RouterLink to ={`/dashboard/student/${id}`} style={{textDecoration:'none'}}> */}
-              <Button variant="contained">
-                View
-              </Button>
-              {/* </RouterLink> */}
-            </TableCell> 
+            <TableCell align="left">{projectName}</TableCell>
+             <TableCell align="left">
+             <Box sx={{display:'flex', flexDirection:'column', alignItems:'start'}}>
+                <Box>
+              {cordinatorEmail}
+              </Box>
+              <Box>
+              {cordinatorContact}
+                  </Box>
+              </Box>
+              </TableCell>
+            
           </TableRow>
         );
       })}

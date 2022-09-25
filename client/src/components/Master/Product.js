@@ -28,7 +28,6 @@ const TABLE_HEAD = [
   { id: 'productCode', label: 'Product Code', alignRight: true },
   { id: 'name', label: 'Name', alignRight: true },
   { id: 'details', label: 'Details', alignRight: true },
-  { id: '' },
 ];
 
 // ----------------------------------------------------------------------
@@ -258,18 +257,7 @@ const Product = (props) => {
                       </TableCell>
                       <TableCell align="left">{name}</TableCell>
                       <TableCell align="left">{details}</TableCell>
-                      {/* <TableCell align="left">{companyName}</TableCell>
-                      <TableCell align="left">{designation}</TableCell> */}
-                      {/* <TableCell align="left">
-                      </TableCell> */}
-
-                      <TableCell align="right">
-                {/* <RouterLink to ={`/dashboard/student/${id}`} style={{textDecoration:'none'}}> */}
-                <Button variant="contained">
-                  View
-                </Button>
-                {/* </RouterLink> */}
-              </TableCell>
+                     
                     </TableRow>
                   );
                 })}

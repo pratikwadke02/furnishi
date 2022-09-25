@@ -1,6 +1,6 @@
 import {filter} from 'lodash';
 import React, { useState, useEffect } from 'react';
-import {  Box,
+import { Box,
   TextField,
   Button,
   Typography,
@@ -12,10 +12,10 @@ import {  Box,
   TableBody,
   TableCell,
   TableContainer,
-  TablePagination, } from '@mui/material';
+  TablePagination } from '@mui/material';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { addManager } from '../../actions/master/manager';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCordinator } from '../../actions/master/cordinator';
 import Label from '../Label';
 import Scrollbar from '../Scrollbar';
 import Iconify from '../Iconify';
@@ -23,10 +23,13 @@ import SearchNotFound from '../SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../../sections/@dashboard/user';
 
 const TABLE_HEAD = [
-  { id: 'projectName', label: 'Name', alignRight: true },
-  { id: 'managerName', label: 'Manager Name', alignRight: true },
-  { id: 'managerEmail', label: 'Manager Email', alignRight: true },
-  { id: 'managerContact', label: 'Manager Contact', alignRight: true },
+  { id: 'orderCode', label: 'Order Code', alignRight: true },
+  { id: 'clientName', label: 'Client Name', alignRight: true },
+  { id: 'serviceType', label: 'Service Type', alignRight: true },
+  { id: 'productType', label: 'Product Type', alignRight: true },
+  { id: 'pincode', label: 'Pincode', alignRight: true },
+    { id: 'status', label: 'Status', alignRight: true },
+  { id: '' },
 ];
 
 // ----------------------------------------------------------------------
@@ -60,9 +63,10 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const Manager = (props) => {
-  const {managers} = props;
-  const [managersTable, setManagersTable] = useState(managers);
+const AllOrders = (props) => {
+    
+  const orders = useSelector((state) => state.order.orders);
+  console.log(orders);
 
   const [page, setPage] = useState(0);
 
@@ -84,7 +88,7 @@ const Manager = (props) => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = managersTable.map((n) => n.id);
+      const newSelecteds = orders.map((n) => n.id);
       setSelected(newSelecteds);
       return;
     }
@@ -119,102 +123,38 @@ const Manager = (props) => {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - managersTable.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - orders.length) : 0;
 
-  const filteredUsers = applySortFilter(managersTable, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(orders, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
 
 
-  const [managerInfo, setManagerInfo] = useState({
-    projectName: '',
-    managerName: '',
-    managerContact: '',
-    managerEmail: '',
-  });
 
+  
   const dispatch = useDispatch();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      console.log(managerInfo);
-      dispatch(addManager(managerInfo));
-      setManagersTable([...managersTable, managerInfo]);
-      setManagerInfo({
-        projectName: '',
-        managerName: '',
-        managerContact: '',
-        managerEmail: '',
-      });
-      alert('Manager Added Successfully');
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  const handleChange = (e) => {
-    setManagerInfo({ ...managerInfo, [e.target.name]: e.target.value });
-    console.log(managerInfo);
-  };
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       console.log(archtDesigrCordInfo);
+//       dispatch(addCordinator(archtDesigrCordInfo));
+//       setorders([...orders, archtDesigrCordInfo]);
+//       setArchtDesigrCordInfo({
+//         projectName: '',
+//         cordinatorName: '',
+//         cordinatorContact: '',
+//         cordinatorEmail: '',
+//       });
+//       alert('Architect/Designer/Cordinator Added Successfully');
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2 }}>
-        <TextField
-          required
-          label="Project Name"
-          variant="outlined"
-          fullWidth
-          sx={{ mr: { md: 1 } }}
-          type="text"
-          name="projectName"
-          value={managerInfo.projectName}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Project Manager Name"
-          required
-          variant="outlined"
-          fullWidth
-          sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
-          type="text"
-          name="managerName"
-          value={managerInfo.managerName}
-          onChange={handleChange}
-        />
-      </Box>
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mt: 2, mb: 2 }}>
-        <TextField
-          required
-          label="Project Manager Contact"
-          variant="outlined"
-          fullWidth
-          sx={{ mr: { md: 1 } }}
-          type="number"
-          name="managerContact"
-          value={managerInfo.managerContact}
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          label="Project Manager Email"
-          variant="outlined"
-          fullWidth
-          sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
-          type="email"
-          name="managerEmail"
-          value={managerInfo.managerEmail}
-          onChange={handleChange}
-        />
-      </Box>
-
-      <Box>
-        <Button variant="contained" color="primary" type="submit">
-          Add Manager
-        </Button>
-      </Box>
-    </form>
     <Box>
       <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
@@ -225,14 +165,14 @@ const Manager = (props) => {
         order={order}
         orderBy={orderBy}
         headLabel={TABLE_HEAD}
-        rowCount={managersTable.length}
+        rowCount={orders.length}
         numSelected={selected.length}
         onRequestSort={handleRequestSort}
         onSelectAllClick={handleSelectAllClick}
       />
       <TableBody>
-        {managersTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((custInfo) => {
-          const { id, projectName, managerName, managerContact, managerEmail  } = custInfo;
+        {orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((custInfo) => {
+          const { id, orderCode, clientName,serviceType, productType, pincode, status   } = custInfo;
           const isItemSelected = selected.indexOf(id) !== -1;
 
           return (
@@ -250,14 +190,24 @@ const Manager = (props) => {
               <TableCell align="center">
                 <Stack direction="row" alignItems="center" spacing={2}>
                   <Typography variant="subtitle2" noWrap>
-                    {projectName}
+                    {orderCode}
                   </Typography>
                 </Stack>
               </TableCell>
-              <TableCell align="left">{managerName}</TableCell>
-              <TableCell align="left">{managerContact}</TableCell>
-              <TableCell align="left">{managerEmail}</TableCell>
-               
+              <TableCell align="left">{clientName}</TableCell>
+              <TableCell align="left">{serviceType}</TableCell>
+              <TableCell align="left">{productType}</TableCell>
+
+            <TableCell align="left">{pincode}</TableCell>
+            <TableCell align="left">{status}</TableCell>
+
+               <TableCell align="right">
+                {/* <RouterLink to ={`/dashboard/student/${id}`} style={{textDecoration:'none'}}> */}
+                <Button variant="contained">
+                  View
+                </Button>
+                {/* </RouterLink> */}
+              </TableCell> 
             </TableRow>
           );
         })}
@@ -284,7 +234,7 @@ const Manager = (props) => {
 <TablePagination
   rowsPerPageOptions={[5, 10, 25]}
   component="div"
-  count={managersTable.length}
+  count={orders.length}
   rowsPerPage={rowsPerPage}
   page={page}
   onPageChange={handleChangePage}
@@ -295,4 +245,4 @@ const Manager = (props) => {
   );
 };
 
-export default Manager;
+export default AllOrders;

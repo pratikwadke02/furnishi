@@ -31,9 +31,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Iconify from '../components/Iconify';
 import Page from '../components/Page';
-import ArchitectDesigner from '../components/Master/Architect.Designer';
-import ArchitectDesignerCordinator from '../components/Master/Architect.Designer.Cordinator';
+
 import NewOrder from '../components/MyOrders/NewOrder';
+import AllOrders from '../components/MyOrders/AllOrders';
 import Manager from '../components/Master/Manager';
 import Product from '../components/Master/Product';
 import Customer from '../components/Master/Customer';
@@ -91,7 +91,7 @@ const MyOrders = () => {
         <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Enquiry
+            Orders
           </Typography>
           {/* <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
             New Setting
@@ -101,15 +101,15 @@ const MyOrders = () => {
             <Box>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={headTab} onChange={handleHeadTabChange} aria-label="basic tabs example">
-                  <Tab label="New Enquiry" {...a11yProps(0)} />
-                  <Tab label="All Enquiries" {...a11yProps(1)} />
+                  <Tab label="New Order" {...a11yProps(0)} />
+                  <Tab label="All Orders" {...a11yProps(1)} />
                 </Tabs>
               </Box>
               <TabPanel value={headTab} index={0}>
                 <NewOrder />
               </TabPanel>
               <TabPanel value={headTab} index={1}>
-                <ArchitectDesignerCordinator cordinators={cordinators} />
+                <AllOrders />
               </TabPanel>
             </Box>
           </Card>

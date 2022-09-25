@@ -1,11 +1,11 @@
 const db = require("../../models");
 const Order = db.order;
 
-exports.create = (req, res) => {
+exports.create = async(req, res) => {
     try{
         var orderCode;
         // check if first order
-        Order.findAll().then(data => {
+        await Order.findAll().then(data => {
             if(data.length == 0){
                 // first enquiry
                 orderCode = 'O100500';
@@ -14,7 +14,7 @@ exports.create = (req, res) => {
                 // get last enquiry code
                 var lastOrderCode = data[data.length - 1].orderCode;
                 // get last 3 digits
-                var lastDigits = lastOrderCode.substring(1, 6);
+                var lastDigits = lastOrderCode.substring(1, 7);
                 // increment by 1
                 var incrementedDigits = parseInt(lastDigits, 10) + 1;
                 // generate code as E100500
@@ -23,7 +23,7 @@ exports.create = (req, res) => {
         });
         // order code does not exist
         // create order
-        Order.create({
+        await Order.create({
             orderCode: orderCode,
             clientName: req.body.clientName,
             clientCode: req.body.clientCode,

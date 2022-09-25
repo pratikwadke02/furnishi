@@ -27,7 +27,6 @@ const TABLE_HEAD = [
   { id: 'managerName', label: 'Manager Name', alignRight: true },
   { id: 'managerEmail', label: 'Manager Email', alignRight: true },
   { id: 'managerContact', label: 'Manager Contact', alignRight: true },
-  { id: '' },
 ];
 
 // ----------------------------------------------------------------------
@@ -260,15 +259,6 @@ const ArchitectDesignerCordinator = (props) => {
               <TableCell align="left">{cordinatorName}</TableCell>
               <TableCell align="left">{cordinatorContact}</TableCell>
               <TableCell align="left">{cordinatorEmail}</TableCell>
-                
-
-               <TableCell align="right">
-                {/* <RouterLink to ={`/dashboard/student/${id}`} style={{textDecoration:'none'}}> */}
-                <Button variant="contained">
-                  View
-                </Button>
-                {/* </RouterLink> */}
-              </TableCell> 
             </TableRow>
           );
         })}
