@@ -24,6 +24,7 @@ import {
   FormControl,
   Tab,
   Tabs,
+  Modal,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -39,6 +40,18 @@ import Manager from '../components/Master/Manager';
 import Product from '../components/Master/Product';
 import Customer from '../components/Master/Customer';
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  width: '100%',
+  transform: 'translate(-50%, -50%)',
+  maxWidth: 800,
+  bgcolor: 'background.paper',
+  // border: '2px solid #000',
+  boxShadow: 1,
+  p: 2,
+};
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,10 +88,7 @@ function a11yProps(index) {
 
 const Enquiry = () => {
 
-  const products = (useSelector(state => state.product.products));
-  const managers = (useSelector(state => state.manager.managers));
-  const cordinators = (useSelector(state => state.cordinator.cordinators));
-  const archDesigrs = (useSelector(state => state.archtDesigr.archDesigrs));
+  const enquiries = (useSelector((state) => state.enquiry.enquiries));
 
   const [headTab, setHeadTab] = useState(0);
   const [subTab, setSubTab] = useState(0);
@@ -88,8 +98,144 @@ const Enquiry = () => {
     setHeadTab(newValue);
   };
 
+  const [open, setOpen] = useState(false);
+  const [enquiryData, setEnquiryData] = useState([]);
+
+  const handleOpenModal = async(id) => {
+    console.log(id);
+    enquiries.map((enquiry) => {
+      if (enquiry.id === id) {
+        setEnquiryData(enquiry);
+      }
+      return null;
+    });
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
+
+  console.log(enquiryData);
+
   return (
     <>
+    <Modal
+        open={open}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Card sx={style}>
+          <Box sx={{ width: '100%', textAlign: 'center' }}>
+            <Typography variant="h4">Enquiry Code: {enquiryData.enquiryCode}</Typography>
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <Box>
+              <Typography variant="h6">Personal Details</Typography>
+            </Box>
+            <Box sx={{display:'flex'}}>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Name: {enquiryData.clientName}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Code: {enquiryData.clientCode}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Product Code: {enquiryData.clientProductCode}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}/>
+            </Box>
+            <Box sx={{mt:1}}>
+              <Typography variant="h6">Service Details</Typography>
+            </Box>
+            <Box sx={{display:'flex'}}>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Type: {enquiryData.serviceType}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Site Condition: {enquiryData.siteCondition}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Product Type: {enquiryData.productType}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}/>
+            </Box>
+            <Box sx={{display:'flex'}}>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Face Area: {enquiryData.faceArea} SqFt</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Floating Shelf: {enquiryData.floatingShelf}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Spot Light: {enquiryData.spotLight} Nos</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Strip Light: {enquiryData.stripLight} Nos</Typography>
+              </Box>
+            </Box>
+            <Box sx={{mt:1}}>
+              <Typography variant="h6">Completion Targets</Typography>
+            </Box>
+            <Box sx={{display:'flex'}}>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Expected Start Date: {enquiryData.expectedStartDate ? enquiryData.expectedStartDate.substring(0,10 ) : null}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Expected End Date: {enquiryData.expectedEndDate ? enquiryData.expectedEndDate.substring(0,10 ) : null}</Typography>
+              </Box>
+            </Box>
+            <Box sx={{mt:1}}>
+              <Typography variant="h6">Working Hours</Typography>
+            </Box>
+            <Box sx={{display:'flex'}}>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Start Time: {enquiryData.startTime ? enquiryData.startTime.substring(12,19) : null} </Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">End Time: {enquiryData.endTime ? enquiryData.endTime.substring(12,19) : null}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Break Start Time: {enquiryData.breakStartTime ? enquiryData.breakStartTime.substring(12,19) : null}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Break End Time: {enquiryData.breakEndTime ? enquiryData.breakEndTime.substring(12,19) : null}</Typography>
+              </Box>
+            </Box>
+            <Box sx={{mt:1}}>
+              <Typography variant="h6">Work Details</Typography>
+            </Box>
+            <Box sx={{display:'flex'}}>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Work Phase: {enquiryData.workPhase}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Details: {enquiryData.workPhaseDetails}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Status: {enquiryData.status}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}/>
+            </Box>
+            <Box sx={{mt:1}}>
+              <Typography variant="h6">Other Details</Typography>
+            </Box>
+            <Box sx={{display:'flex'}}>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Locality: {enquiryData.locality}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Pincode: {enquiryData.pincode}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}>
+              <Typography variant="body1">Quote: {enquiryData.quote}</Typography>
+              </Box>
+              <Box sx={{width:'100%'}}/>
+            </Box>
+          </Box>
+        </Card>
+      </Modal>
       <Page title="User">
         <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
@@ -112,7 +258,7 @@ const Enquiry = () => {
                 <NewEnquiry />
               </TabPanel>
               <TabPanel value={headTab} index={1}>
-                <AllEnquiries />
+                <AllEnquiries enquiries={enquiries} openModal={handleOpenModal} />
               </TabPanel>
             </Box>
           </Card>

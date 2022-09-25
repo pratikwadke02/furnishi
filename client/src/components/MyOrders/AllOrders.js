@@ -65,7 +65,8 @@ function applySortFilter(array, comparator, query) {
 
 const AllOrders = (props) => {
     
-  const orders = useSelector((state) => state.order.orders);
+  const {orders, openModal} = props;
+  // const orders = useSelector((state) => state.order.orders);
   console.log(orders);
 
   const [page, setPage] = useState(0);
@@ -203,7 +204,7 @@ const AllOrders = (props) => {
 
                <TableCell align="right">
                 {/* <RouterLink to ={`/dashboard/student/${id}`} style={{textDecoration:'none'}}> */}
-                <Button variant="contained">
+                <Button variant="contained" onClick={()=>openModal(id)}>
                   View
                 </Button>
                 {/* </RouterLink> */}

@@ -12,6 +12,7 @@ import { Box,
   TableBody,
   TableCell,
   TableContainer,
+  Modal,
   TablePagination } from '@mui/material';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -65,8 +66,10 @@ function applySortFilter(array, comparator, query) {
 
 const AllEnquiries = (props) => {
     
-  const enquiries = useSelector((state) => state.enquiry.enquiries);
-  console.log(enquiries);
+  const {enquiries, openModal} = props;
+  // const enquiries = useSelector((state) => state.enquiry.enquiries);
+
+  const [modal, setModal] = useState(false);
 
   const [page, setPage] = useState(0);
 
@@ -130,29 +133,6 @@ const AllEnquiries = (props) => {
   const isUserNotFound = filteredUsers.length === 0;
 
 
-
-  
-  const dispatch = useDispatch();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       console.log(archtDesigrCordInfo);
-//       dispatch(addCordinator(archtDesigrCordInfo));
-//       setenquiries([...enquiries, archtDesigrCordInfo]);
-//       setArchtDesigrCordInfo({
-//         projectName: '',
-//         cordinatorName: '',
-//         cordinatorContact: '',
-//         cordinatorEmail: '',
-//       });
-//       alert('Architect/Designer/Cordinator Added Successfully');
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-
   return (
     <>
     <Box>
@@ -203,7 +183,7 @@ const AllEnquiries = (props) => {
 
                <TableCell align="right">
                 {/* <RouterLink to ={`/dashboard/student/${id}`} style={{textDecoration:'none'}}> */}
-                <Button variant="contained">
+                <Button variant="contained" onClick={()=>openModal(id)}>
                   View
                 </Button>
                 {/* </RouterLink> */}
