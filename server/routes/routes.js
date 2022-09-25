@@ -24,6 +24,10 @@ module.exports = (app) => {
     const toolsSiteSettings = require('../controllers/siteSettings/tools.siteSettings.controller.js');
     const workPhaseSiteSettings = require('../controllers/siteSettings/workPhase.siteSettings.controller.js');
 
+    const enquiry = require('../controllers/enquiry/enquiry.controller.js');
+    const order = require('../controllers/order/order.controller.js');
+
+
     const router = require('express').Router();
 
     router.post("/register", user.register);
@@ -90,6 +94,11 @@ module.exports = (app) => {
     router.post("/addProduct", product.create);
     router.get("/getProducts", product.findAll);
     
+    router.post("/addEnquiry", enquiry.create);
+    router.get("/getEnquiries", enquiry.findAll);
+
+    router.post("/addOrder", order.create);
+    router.get("/getOrders", order.findAll);
 
     app.use("/api/wsb", router);
 }
