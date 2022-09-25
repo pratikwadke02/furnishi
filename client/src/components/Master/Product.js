@@ -25,6 +25,7 @@ import SearchNotFound from '../SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../../sections/@dashboard/user';
 
 const TABLE_HEAD = [
+  { id: 'productCode', label: 'Product Code', alignRight: true },
   { id: 'name', label: 'Name', alignRight: true },
   { id: 'details', label: 'Details', alignRight: true },
   { id: '' },
@@ -138,6 +139,7 @@ const Product = (props) => {
   const isUserNotFound = filteredUsers.length === 0;
 
   const [productInfo, setProductInfo] = useState({
+    productCode: '',
     name: '',
     details: '',
   });
@@ -151,6 +153,7 @@ const Product = (props) => {
       dispatch(addNewProduct(productInfo));
       setProductsTable([...productsTable, productInfo]);
       setProductInfo({
+        productCode: '',
         name: '',
         details: '',
       });
@@ -169,28 +172,43 @@ const Product = (props) => {
     <>
       <form onSubmit={handleSubmit}>
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2 }}>
+        <TextField
+          required
+          label="Product Code"
+          variant="outlined"
+          fullWidth
+          sx={{ mr: { md: 1 } }}
+          type="text"
+          name="productCode"
+          value={productInfo.productCode}
+          onChange={handleChange}
+        />
           <TextField
             required
             label="Product Name"
             variant="outlined"
             fullWidth
-            sx={{ mr: { md: 1 } }}
+            sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
             type="text"
             name="name"
             value={productInfo.name}
             onChange={handleChange}
           />
-          <TextField
+          
+        </Box>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mb: 2  }}>
+        <TextField
             label="Product Details"
             required
             variant="outlined"
             fullWidth
-            sx={{ ml: { md: 1 }, mt: { xs: 2, md: 0 } }}
+            sx={{ mr: { md: 1 } }}
             type="text"
             name="details"
             value={productInfo.details}
             onChange={handleChange}
           />
+        <Box sx={{width:'100%', ml:{md:1}}}/>
         </Box>
         <Box>
           <Button variant="contained" color="primary" type="submit">
@@ -215,7 +233,7 @@ const Product = (props) => {
               />
               <TableBody>
                 {productsTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((custInfo) => {
-                  const { id, name, details } =
+                  const { id, name, details, productCode } =
                     custInfo;
                   const isItemSelected = selected.indexOf(id) !== -1;
 
@@ -234,10 +252,11 @@ const Product = (props) => {
                       <TableCell align="center">
                         <Stack direction="row" alignItems="center" spacing={2}>
                           <Typography variant="subtitle2" noWrap>
-                            {name}
+                            {productCode}
                           </Typography>
                         </Stack>
                       </TableCell>
+                      <TableCell align="left">{name}</TableCell>
                       <TableCell align="left">{details}</TableCell>
                       {/* <TableCell align="left">{companyName}</TableCell>
                       <TableCell align="left">{designation}</TableCell> */}

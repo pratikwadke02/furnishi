@@ -1,4 +1,4 @@
-import { ADD_NEW_ENQUIRY, GET_ALL_ENQUIRIES } from 'src/constants/actionTypes';
+import { ADD_NEW_ENQUIRY, GET_ALL_ENQUIRIES } from '../../constants/actionTypes';
 import * as api from '../../api/index';
 
 export const addEnquiry = (enquiryInfo) => async (dispatch) => {

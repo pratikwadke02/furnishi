@@ -28,6 +28,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { addEnquiry } from '../../actions/enquiry/enquiry';
 import Page from '../Page';
 // import Date from '../components/Date';
 
@@ -57,6 +58,7 @@ const NewEnquiry = () => {
     locality: '',
     pincode: '',
     status: 'pending',
+    quote: '',
   });
 
   const handleChange = ({ currentTarget: input }) => {
@@ -83,6 +85,7 @@ const NewEnquiry = () => {
     e.preventDefault();
     try{
         console.log(enquiry);
+        dispatch(addEnquiry(enquiry));
     }catch(error){
         console.log(error);
     }
