@@ -20,6 +20,8 @@ import { getProducts } from '../../actions/master/product';
 import { getManagers } from '../../actions/master/manager';
 import { getCordinators } from '../../actions/master/cordinator';
 import { getArchtDesigrs } from '../../actions/master/archDesgr';
+import { getEnquiries } from '../../actions/enquiry/enquiry';
+import { getOrders } from '../../actions/order/order';
 
 //
 import DashboardNavbar from './DashboardNavbar';
@@ -73,6 +75,8 @@ export default function DashboardLayout() {
       dispatch(getManagers());
       dispatch(getCordinators());
       dispatch(getArchtDesigrs());
+      dispatch(getEnquiries());
+      dispatch(getOrders());
     };
     getReduxData();
   }, [dispatch]);

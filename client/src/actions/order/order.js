@@ -1,4 +1,4 @@
-import { ADD_NEW_ORDER, GET_ALL_ORDERS } from 'src/constants/actionTypes';
+import { ADD_NEW_ORDER, GET_ALL_ORDERS } from '../../constants/actionTypes';
 import * as api from '../../api/index';
 
 export const addOrder = (orderInfo) => async (dispatch) => {

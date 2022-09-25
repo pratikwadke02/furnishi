@@ -34,6 +34,7 @@ import Page from '../components/Page';
 import ArchitectDesigner from '../components/Master/Architect.Designer';
 import ArchitectDesignerCordinator from '../components/Master/Architect.Designer.Cordinator';
 import NewEnquiry from '../components/Enquiry/NewEnquiry';
+import AllEnquiries from '../components/Enquiry/AllEnquiries';
 import Manager from '../components/Master/Manager';
 import Product from '../components/Master/Product';
 import Customer from '../components/Master/Customer';
@@ -111,7 +112,7 @@ const Enquiry = () => {
                 <NewEnquiry />
               </TabPanel>
               <TabPanel value={headTab} index={1}>
-                <ArchitectDesignerCordinator cordinators={cordinators} />
+                <AllEnquiries />
               </TabPanel>
             </Box>
           </Card>
