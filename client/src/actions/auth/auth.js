@@ -29,3 +29,12 @@ export const logout = (router) => async(dispatch) => {
         console.log(error);
     }
 }
+
+export const updatePassword = (passwordInfo) => async(dispatch) => {
+    try{
+        const {data} = await api.updatePassword(passwordInfo);
+        dispatch({ type : AUTH, data });
+    }catch(error){
+        console.log(error);
+    }
+}

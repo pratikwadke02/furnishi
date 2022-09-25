@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 
 const register = require('../middleware/register.js');
 const login = require('../middleware/login.js');
+const updatePassword = require('../middleware/updatePassword.js')
 
 
 const SALT = 10;
@@ -72,6 +73,47 @@ exports.findAll = async (req, res) => {
     try{
         const users = await User.findAll();
         res.send(users);
+    }catch(error){
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+exports.updatePassword = async(req, res) => {
+    try{
+        const validateBody = {
+            password: req.body.password,
+            confirmPassword: req.body.confirmPassword,
+        }
+        const {error} = updatePassword.passwordValidate(validateBody);
+        if(error){
+            console.log(error);
+            return res.status(400).send(error.details[0].message);
+        }
+        const user = await User.findOne({
+            where: {
+                email: req.body.email,
+            }
+        });
+        if(!user){
+            return res.status(400).send('Invalid email or password.');
+        }
+        const salt = await bcrypt.genSalt(SALT);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        const validPassword = await bcrypt.compare(req.body.oldPassword, user.password);
+        if(!validPassword){
+            return res.status(400).send('Invalid email or password.');
+        }
+        const updatedUser = await User.update({
+            password: hashedPassword,
+        },{
+            where: {
+                email: req.body.email,
+            }
+        });
+        res.send({
+            data: updatedUser,
+        });
     }catch(error){
         console.log(error);
         res.status(500).send(error);

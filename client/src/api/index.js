@@ -15,6 +15,7 @@ API.interceptors.request.use((req) => {
 
 export const login = (authInfo) => API.post("/login", authInfo);
 export const register = (authInfo) => API.post("/register", authInfo);
+export const updatePassword = (authInfo) => API.post("/updatePassword", authInfo);
 
 export const addCustomerInfo = (customerInfo) => API.post('/addCustomerInfo', customerInfo );
 export const getCustomerInfo = () => API.get('/getCustomerInfo');
