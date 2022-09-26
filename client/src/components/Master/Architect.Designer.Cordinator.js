@@ -23,10 +23,10 @@ import SearchNotFound from '../SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../../sections/@dashboard/user';
 
 const TABLE_HEAD = [
-  { id: 'projectName', label: 'Name', alignRight: true },
-  { id: 'managerName', label: 'Manager Name', alignRight: true },
-  { id: 'managerEmail', label: 'Manager Email', alignRight: true },
-  { id: 'managerContact', label: 'Manager Contact', alignRight: true },
+  { id: 'projectName', label: 'Project Name', alignRight: true },
+  { id: 'name', label: ' Name', alignRight: true },
+  { id: 'email', label: ' Email', alignRight: true },
+  { id: 'contact', label: ' Contact', alignRight: true },
 ];
 
 // ----------------------------------------------------------------------
@@ -61,7 +61,7 @@ function applySortFilter(array, comparator, query) {
 }
 
 const ArchitectDesignerCordinator = (props) => {
-  const {cordinators} = props;
+  const {cordinators, archDesigrs} = props;
   const [cordinatorsTable , setCordinatorsTable] = useState(cordinators);
 
   const [page, setPage] = useState(0);

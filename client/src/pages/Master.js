@@ -116,27 +116,27 @@ const Master = () => {
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={headTab} onChange={handleHeadTabChange} aria-label="basic tabs example">
                   <Tab label="Architect/Designer" {...a11yProps(0)} />
-                  <Tab label="Architect/Designer Cordinator" {...a11yProps(1)} />
-                  <Tab label="Manager" {...a11yProps(2)} />
-                  <Tab label="Product" {...a11yProps(3)} />
-                  <Tab label="Customer" {...a11yProps(4)} />
+                  <Tab label="Cordinator" {...a11yProps(1)} />
+                  {/* <Tab label="Manager" {...a11yProps(2)} /> */}
+                  <Tab label="Product" {...a11yProps(2)} />
+                  {/* <Tab label="Customer" {...a11yProps(4)} /> */}
                 </Tabs>
               </Box>
               <TabPanel value={headTab} index={0}>
                 <ArchitectDesigner cordinators={cordinators} archDesigrs={archDesigrs} />
               </TabPanel>
               <TabPanel value={headTab} index={1}>
-                <ArchitectDesignerCordinator cordinators={cordinators} />
+                <ArchitectDesignerCordinator cordinators={cordinators} archDesigrs={archDesigrs}/>
               </TabPanel>
-              <TabPanel value={headTab} index={2}>
+              {/* <TabPanel value={headTab} index={2}>
                 <Manager managers={managers} />
-              </TabPanel>
-              <TabPanel value={headTab} index={3}>
+              </TabPanel> */}
+              <TabPanel value={headTab} index={2}>
                 <Product products={products} />
               </TabPanel>
-              <TabPanel value={headTab} index={4}>
+              {/* <TabPanel value={headTab} index={4}>
                 <Customer />
-              </TabPanel>
+              </TabPanel> */}
             </Box>
           </Card>
         </Container>

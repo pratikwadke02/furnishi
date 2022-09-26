@@ -25,10 +25,13 @@ import {
   Tab,
   Tabs,
   Modal,
+  IconButton,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
+import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Iconify from '../components/Iconify';
 import Page from '../components/Page';
@@ -101,6 +104,30 @@ const Enquiry = () => {
   const [open, setOpen] = useState(false);
   const [enquiryData, setEnquiryData] = useState([]);
 
+  const nextEnquiry = async(id) => {
+    // id += 1;
+    // await enquiries.map((enquiry) => {
+    //   if (enquiry.id === id) {
+    //     setEnquiryData(enquiry);
+    //   }
+    //   return null;
+    // }
+    // );
+  };
+
+  const previousEnquiry = async(id) => {
+    // if(id > 1){
+    //   id -= 1;
+    //   await enquiries.map((enquiry) => {
+    //     if (enquiry.id === id) {
+    //       setEnquiryData(enquiry);
+    //     }
+    //     return null;
+    //   }
+    //   );
+    // }
+  };
+
   const handleOpenModal = async(id) => {
     console.log(id);
     enquiries.map((enquiry) => {
@@ -126,7 +153,9 @@ const Enquiry = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Card sx={style}>
+        {
+          enquiryData ? (
+            <Card sx={style}>
           <Box sx={{ width: '100%', textAlign: 'center' }}>
             <Typography variant="h4">Enquiry Code: {enquiryData.enquiryCode}</Typography>
           </Box>
@@ -234,7 +263,17 @@ const Enquiry = () => {
               <Box sx={{width:'100%'}}/>
             </Box>
           </Box>
+          <Box sx={{mt:1,float:'right'}}>
+            <IconButton onClick={previousEnquiry(enquiryData.id)} sx={{border:'1px solid', borderColor:'primary.main', mr:1, p:0}}>
+              <KeyboardArrowLeftOutlinedIcon color='primary'  />
+            </IconButton>
+            <IconButton onClick={nextEnquiry(enquiryData.id)} sx={{border:'1px solid', borderColor:'primary.main', ml:1, p:0}}>
+              <KeyboardArrowRightOutlinedIcon color='primary'/>
+            </IconButton>
+          </Box>
         </Card>
+          ) : null
+          }        
       </Modal>
       <Page title="User">
         <Container>
